@@ -3,7 +3,9 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Input } from 'react-native-elements';
 import DefaultButton from '../../components/button';
+import authRepository from '../../repositories/authRepository';
 import colors from '../../styles/colors';
+import AuthResponse from '../../types/AuthResponse';
 import { AuthContext } from './../../context';
 import customStyles from './../../styles';
 import typography from './../../styles/typography';
@@ -17,8 +19,9 @@ export default function SignInScreen({navigation}: {navigation: NavigationHelper
         navigation.navigate('SignUp');
     };
 
-    const signIn = () => {
-
+    const signIn = async () => {
+        const authResponse: AuthResponse = await authRepository.login(email, password);
+        authContext.signIn(authResponse.token);
     };
 
     return (
@@ -37,6 +40,7 @@ export default function SignInScreen({navigation}: {navigation: NavigationHelper
                     defaultValue={''}
                     value={password}
                     onChangeText={setPassword}
+                    secureTextEntry={true}
                     placeholder={'Password'}
                 />
             </View>
@@ -50,6 +54,7 @@ export default function SignInScreen({navigation}: {navigation: NavigationHelper
                         color: colors.white,
                         ...typography.bold,
                     }}
+                    onClick={signIn}
                 />
                 <DefaultButton
                     text={'Sign Up'}

@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { AuthContext } from './context';
 import SignInScreen from './screens/SignIn';
 import SignUpScreen from './screens/SignUp';
+import HomeScreen from './screens/Home';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -24,33 +25,14 @@ function AuthNavigator() {
   );
 }
 
-function TabNavigation() {
-    return (
-        <Tab.Navigator
-                    screenOptions={({ route }) => ({
-                        tabBarIcon: ({ focused, color, size }) => {
-                            const iconRouteMap = {
-                                Adverts: <View style={{marginTop: 5}}><IconFeather name={'search'} size={size} color={color} /></View>,
-                                Favourites: <View style={{marginTop: 5}}><IconFeather name={'heart'} size={size} color={color} /></View>,
-                                MyObjectsTab: <View style={{marginTop: 5}}><IconFontAwesome name={'home'} size={size + 5} color={color} /></View>,
-                                Chat: <View style={{marginTop: 5}}><IconMaterialCommunityIcons name={'chat'} size={size + 5} color={color} /></View>,
-                                Profile: <View style={{marginTop: 5}}><IconEvilIcons name={'user'} size={size + 13} color={color} /></View>
-                            };
-                        return iconRouteMap[route.name];
-                        },
-                    })}
-                    tabBarOptions={{
-                        activeTintColor: 'black',
-                        inactiveTintColor: 'gray',
-                    }}
-                >
-                    <Tab.Screen name="Adverts" component={AdvertsScreen} options={{ title: 'Объявления' }} />
-                    <Tab.Screen name="Favourites" component={FavouritesScreen} options={{ title: 'Избранное' }} />
-                    <Tab.Screen name="MyObjectsTab" component={MyObjectsScreen} options={{ title: 'Мой кабинет' }} />
-                    <Tab.Screen name="Profile" component={ProfileScreen} options={{ title: 'Профиль' }} />
-        </Tab.Navigator>
-    );
+function AppNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+    </Stack.Navigator>
+  );
 }
+
 export default function App({ navigation }) {
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
@@ -141,7 +123,7 @@ return (
         {state.userToken == null ? (
           <Stack.Screen name="Auth" component={AuthNavigator} />
         ) : (
-          <Stack.Screen name="App" component={TabNavigation} />
+          <Stack.Screen name="App" component={AppNavigator} />
         )}
       </Stack.Navigator>
     </AuthContext.Provider>
