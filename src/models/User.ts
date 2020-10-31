@@ -10,7 +10,7 @@ export default class User{
         this.email = email || '';
     }
 
-    public static create(data: object) {
+    public static create(data) {
         return new User(data.id, data.name, data.email);
     }
 }

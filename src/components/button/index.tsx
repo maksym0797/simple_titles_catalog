@@ -16,10 +16,10 @@ export default function DefaultButton(
     }
 ) {
     return (
-        <View style={{flexDirection: 'row'}}>
+        <View style={styles.container}>
             <TouchableOpacity 
                 style={{
-                    ...styles.container,
+                    ...styles.buttonContainer,
                     ...containerStyle,
                 }}
                 onPress={onClick}
@@ -37,6 +37,9 @@ export default function DefaultButton(
 
 const styles = StyleSheet.create({
     container: {
+        flexDirection: 'row',
+    },
+    buttonContainer: {
         backgroundColor: 'grey',
         height: 60,
         width: '80%',
