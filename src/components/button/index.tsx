@@ -1,33 +1,33 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text, View, } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import typography from '../../styles/typography';
 
-export default function DefaultButton(
-    {
-        text,
-        containerStyle,
-        textStyle,
-        onClick,
-    } : {
-        text: string,
-        containerStyle: object | null,
-        textStyle: object | null,
-        onClick: Function | null,
-    }
-) {
+export default function DefaultButton({
+    text,
+    containerStyle,
+    textStyle,
+    onClick,
+}: {
+    text: string;
+    containerStyle: object | null;
+    textStyle: object | null;
+    onClick: Function | null;
+}) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity 
+            <TouchableOpacity
                 style={{
                     ...styles.buttonContainer,
                     ...containerStyle,
                 }}
                 onPress={onClick}
             >
-                <Text style={{
-                    ...styles.text,
-                    ...textStyle,
-                }}>
+                <Text
+                    style={{
+                        ...styles.text,
+                        ...textStyle,
+                    }}
+                >
                     {text}
                 </Text>
             </TouchableOpacity>

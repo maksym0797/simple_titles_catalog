@@ -10,7 +10,11 @@ import { AuthContext } from './../../context';
 import customStyles from './../../styles';
 import typography from './../../styles/typography';
 
-export default function SignInScreen({navigation}: {navigation: NavigationHelpers}) {
+export default function SignInScreen({
+    navigation,
+}: {
+    navigation: NavigationHelpers;
+}) {
     const authContext = React.useContext(AuthContext);
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -20,12 +24,17 @@ export default function SignInScreen({navigation}: {navigation: NavigationHelper
     };
 
     const signIn = async () => {
-        const authResponse: AuthResponse = await authRepository.login(email, password);
+        const authResponse: AuthResponse = await authRepository.login(
+            email,
+            password
+        );
         authContext.signIn(authResponse.token);
     };
 
     return (
-        <View style={{ ...customStyles.paddingContainer, ...styles.centerColumn}}>
+        <View
+            style={{ ...customStyles.paddingContainer, ...styles.centerColumn }}
+        >
             <View style={styles.header}>
                 <Text style={typography.h1}>Titles Catalog</Text>
             </View>
@@ -66,7 +75,7 @@ export default function SignInScreen({navigation}: {navigation: NavigationHelper
             </View>
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     centerColumn: {

@@ -10,7 +10,11 @@ import typography from '../../styles/typography';
 import AuthResponse from '../../types/AuthResponse';
 import { AuthContext } from './../../context';
 
-export default function SignUpScreen({navigation}: {navigation: NavigationHelpers}) {
+export default function SignUpScreen({
+    navigation,
+}: {
+    navigation: NavigationHelpers;
+}) {
     const authContext = React.useContext(AuthContext);
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -26,7 +30,12 @@ export default function SignUpScreen({navigation}: {navigation: NavigationHelper
     };
 
     return (
-        <View style={{ ...customStyles.paddingContainer, ...styles.centeredColumn }}>
+        <View
+            style={{
+                ...customStyles.paddingContainer,
+                ...styles.centeredColumn,
+            }}
+        >
             <Input
                 defaultValue={''}
                 value={name}
@@ -59,11 +68,11 @@ export default function SignUpScreen({navigation}: {navigation: NavigationHelper
             />
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     centeredColumn: {
         alignItems: 'center',
         justifyContent: 'center',
-    }
+    },
 });
