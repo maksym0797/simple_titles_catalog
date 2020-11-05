@@ -11,7 +11,13 @@ export default function TitleItem({ item }: { item: Title }) {
                 <Image style={styles.image} source={{ uri: item.image }} />
             </View>
             <View style={styles.descriptionContainer}>
-                <Text style={{ ...typography.h3, ...typography.bold }}>
+                <Text
+                    style={{
+                        ...typography.h4,
+                        ...typography.bold,
+                        maxWidth: '80%',
+                    }}
+                >
                     {item.name}
                 </Text>
                 <View>
@@ -37,7 +43,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         width: '30%',
         height: 150,
-        marginRight: 5,
+        marginRight: 15,
     },
     image: {
         width: '100%',

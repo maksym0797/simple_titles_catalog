@@ -17,9 +17,6 @@ export default function SearchBar({ setQuery }: { setQuery: Function }) {
                 keyboardType={'web-search'}
                 placeholder={'Search'}
                 placeholderTextColor={'#8190A5'}
-                leftIcon={
-                    <IconFeather name={'search'} size={20} color={'#a4a4a4'} />
-                }
                 inputContainerStyle={styles.inputContainer}
                 textAlignVertical={'top'}
                 inputStyle={styles.input}
@@ -33,18 +30,17 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        maxHeight: 28,
-        marginVertical: 15,
-        justifyContent: 'space-between',
+        marginVertical: 25,
         marginRight: 10,
     },
     inputContainer: {
         borderBottomWidth: 0,
         backgroundColor: '#E5E9F2',
-        paddingHorizontal: 15,
-        borderRadius: 3,
+        width: '100%',
     },
     input: {
-        paddingLeft: 5,
+        backgroundColor: '#E5E9F2',
+        borderRadius: 10,
+        paddingHorizontal: 15,
     },
 });

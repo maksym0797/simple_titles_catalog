@@ -3,10 +3,12 @@ import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-community/async-storage';
-import { AuthContext } from './context';
+import { AuthContext } from './AuthContext';
 import SignInScreen from './screens/SignIn';
 import SignUpScreen from './screens/SignUp';
 import HomeScreen from './screens/Home';
+import colors from './styles/colors';
+import { TOKEN_NAME } from './constants';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -23,7 +25,21 @@ function AuthNavigator() {
 function AppNavigator() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name='Home' component={HomeScreen} />
+            <Stack.Screen
+                name='Home'
+                component={HomeScreen}
+                options={({ navigation, route }) => ({
+                    headerTitleStyle: {
+                        fontFamily: 'Arial',
+                        color: colors.whiteText,
+                        fontWeight: '300',
+                        fontSize: 22,
+                    },
+                    headerStyle: {
+                        backgroundColor: '#151515',
+                    },
+                })}
+            />
         </Stack.Navigator>
     );
 }
@@ -65,7 +81,7 @@ export default function App({ navigation }) {
             let userToken;
 
             try {
-                userToken = await AsyncStorage.getItem('userToken');
+                userToken = await AsyncStorage.getItem(TOKEN_NAME);
             } catch (e) {
                 // Restoring token failed
             }
@@ -88,14 +104,14 @@ export default function App({ navigation }) {
                 // After getting token, we need to persist the token using `AsyncStorage`
                 // In the example, we'll use a dumm y token
                 if (!skipSave) {
-                    AsyncStorage.setItem('userToken', data);
+                    AsyncStorage.setItem(TOKEN_NAME, data);
                 }
                 console.log(data);
 
                 dispatch({ type: 'SIGN_IN', token: data });
             },
             signOut: () => {
-                AsyncStorage.removeItem('userToken');
+                AsyncStorage.removeItem(TOKEN_NAME);
                 AsyncStorage.removeItem('user');
                 dispatch({ type: 'SIGN_OUT' });
             },

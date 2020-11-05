@@ -21,13 +21,13 @@ export default StyleSheet.create({
         fontFamily: 'Arial',
         fontSize: 20,
         textTransform: 'uppercase',
-        color: 'black',
+        color: '#e5e5e5',
     },
     h4: {
         fontFamily: 'Arial',
         fontSize: 16,
         textTransform: 'uppercase',
-        color: 'black',
+        color: '#e5e5e5',
     },
     h5: {
         fontSize: 16,
@@ -39,13 +39,15 @@ export default StyleSheet.create({
         textTransform: 'none',
         fontWeight: 'normal',
         fontFamily: 'Arial',
-        color: 'black',
+        color: '#e5e5e5',
     },
     thinHeading: {
         fontFamily: 'Arial',
     },
     smallText: {
         fontSize: 14,
+        color: '#e5e5e5',
+        lineHeight: 20,
     },
     black: {
         color: 'black',

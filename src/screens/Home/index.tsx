@@ -1,30 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, Text } from 'react-native';
 import DefaultButton from '../../components/button';
-import { AuthContext } from '../../context';
+import { AuthContext } from '../../AuthContext';
 import titlesRepository from '../../repositories/titlesRepository';
 import customStyles from '../../styles';
 import SearchBar from './components/SearchBar';
 import TitlesList from './components/TitlesList';
-import TitleItem from './components/TitlesList/TitleItem';
 
 export default function HomeScreen({}) {
     const authContext = React.useContext(AuthContext);
     const [titles, setTitles] = useState([]);
     const [keyword, setQueryKeyword] = useState('');
     const fetchTitles = async (page: Number = 1) => {
-        const titles = await titlesRepository.search(keyword, page);
-        setTitles(titles);
+        const newTitles = await titlesRepository.search(keyword, page);
+        setTitles(page > 1 ? titles.concat(newTitles) : newTitles);
     };
     useEffect(() => {
         fetchTitles();
     }, [keyword]);
 
     return (
-        <SafeAreaView style={{ ...customStyles.paddingContainer }}>
+        <SafeAreaView
+            style={{
+                ...customStyles.paddingContainer,
+                backgroundColor: '#151515',
+            }}
+        >
             <SearchBar setQuery={setQueryKeyword} />
-            <TitlesList titles={titles} />
-            <DefaultButton text={'Sign Out'} onClick={authContext.signOut} />
+            <TitlesList
+                titles={titles}
+                fetchPage={fetchTitles}
+                keyword={keyword}
+            />
+            <DefaultButton
+                containerStyle={{ height: 20 }}
+                text={'Sign Out'}
+                onClick={authContext.signOut}
+            />
         </SafeAreaView>
     );
 }

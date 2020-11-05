@@ -6,7 +6,7 @@ import DefaultButton from '../../components/button';
 import authRepository from '../../repositories/authRepository';
 import colors from '../../styles/colors';
 import AuthResponse from '../../types/AuthResponse';
-import { AuthContext } from './../../context';
+import { AuthContext } from '../../AuthContext';
 import customStyles from './../../styles';
 import typography from './../../styles/typography';
 

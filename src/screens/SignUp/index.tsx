@@ -8,7 +8,7 @@ import customStyles from '../../styles';
 import colors from '../../styles/colors';
 import typography from '../../styles/typography';
 import AuthResponse from '../../types/AuthResponse';
-import { AuthContext } from './../../context';
+import { AuthContext } from '../../AuthContext';
 
 export default function SignUpScreen({
     navigation,

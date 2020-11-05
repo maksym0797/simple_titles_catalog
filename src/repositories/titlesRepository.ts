@@ -1,5 +1,4 @@
 import unAuthorizedClient from './../clients/unAuthorizedClient';
-import { AxiosResponse } from 'axios';
 import { API_URL } from '../constants';
 import Title from '../models/Title';
 
