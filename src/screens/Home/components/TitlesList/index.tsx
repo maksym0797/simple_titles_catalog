@@ -7,10 +7,12 @@ export default function TitlesList({
     titles,
     fetchPage,
     keyword,
+    favouriteIds = [],
 }: {
     titles: Array<Title>;
     fetchPage: Function;
     keyword: string;
+    favouriteIds: Array<Number>;
 }) {
     const [page, setPage] = useState(1);
 
@@ -24,15 +26,25 @@ export default function TitlesList({
         console.log(page);
     }, [keyword]);
 
+    const renderItem = ({ item }: { item: Title }) => {
+        console.log(favouriteIds);
+        item.isFavourite = favouriteIds.includes(item.id);
+        console.log(item.isFavourite);
+        return <TitleItem item={item} />;
+    };
+
     return (
-        <FlatList
-            data={titles}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={TitleItem}
-            onEndReached={() => {
-                setPage(page + 1);
-            }}
-            onEndReachedThreshold={0.5}
-        />
+        <>
+            {false && <TitleItem item={titles[0]} />}
+            <FlatList
+                data={titles}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={renderItem}
+                onEndReached={() => {
+                    setPage(page + 1);
+                }}
+                onEndReachedThreshold={0.5}
+            />
+        </>
     );
 }

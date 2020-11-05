@@ -6,18 +6,28 @@ import titlesRepository from '../../repositories/titlesRepository';
 import customStyles from '../../styles';
 import SearchBar from './components/SearchBar';
 import TitlesList from './components/TitlesList';
+import utils from '../../utils';
 
 export default function HomeScreen({}) {
     const authContext = React.useContext(AuthContext);
     const [titles, setTitles] = useState([]);
+    const [favouriteIds, setFavouriteIds] = useState([]);
     const [keyword, setQueryKeyword] = useState('');
     const fetchTitles = async (page: Number = 1) => {
         const newTitles = await titlesRepository.search(keyword, page);
         setTitles(page > 1 ? titles.concat(newTitles) : newTitles);
     };
+    const fetchFavouriteIds = async () => {
+        const favouriteIds = await utils.getFavouriteIds();
+
+        setFavouriteIds(favouriteIds);
+    };
     useEffect(() => {
         fetchTitles();
     }, [keyword]);
+    useEffect(() => {
+        fetchFavouriteIds();
+    }, []);
 
     return (
         <SafeAreaView
@@ -31,6 +41,7 @@ export default function HomeScreen({}) {
                 titles={titles}
                 fetchPage={fetchTitles}
                 keyword={keyword}
+                favouriteIds={favouriteIds}
             />
             <DefaultButton
                 containerStyle={{ height: 20 }}

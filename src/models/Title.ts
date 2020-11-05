@@ -5,6 +5,7 @@ export default class Title {
     public image: string;
     public platforms: Array<any>;
     public isShow: boolean;
+    public isFavourite: boolean;
 
     public static create(data) {
         return new Title(
@@ -35,5 +36,6 @@ export default class Title {
         this.image = image;
         this.platforms = platforms;
         this.isShow = isShow;
+        this.isFavourite = false;
     }
 }
